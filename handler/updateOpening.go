@@ -25,7 +25,10 @@ import (
 func UpdateOpeningHandler(ctx *gin.Context) {
 	request := UpdateOpeningRequest{}
 
-	ctx.BindJSON(&request)
+	err := ctx.BindJSON(&request)
+	if err != nil {
+		return
+	}
 
 	if err := request.Validate(); err != nil {
 		logger.Errorf("validation error: %v", err.Error())
