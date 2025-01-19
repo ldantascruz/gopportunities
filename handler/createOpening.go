@@ -9,7 +9,10 @@ import (
 func CreateOpeningHandler(ctx *gin.Context) {
 	request := CreateOpeningRequest{}
 
-	ctx.BindJSON(&request)
+	err := ctx.BindJSON(&request)
+	if err != nil {
+		return
+	}
 
 	if err := request.Validate(); err != nil {
 		logger.Errorf("validation error: %v", err.Error())
@@ -32,6 +35,18 @@ func CreateOpeningHandler(ctx *gin.Context) {
 		return
 	}
 
-	sendSuccess(ctx, "create-opening", opening)
+	response := schemas.OpeningResponse{
+		ID:        opening.ID,
+		CreatedAt: opening.CreatedAt,
+		UpdatedAt: opening.UpdatedAt,
+		DeletedAt: opening.DeletedAt.Time,
+		Role:      opening.Role,
+		Company:   opening.Company,
+		Location:  opening.Location,
+		Remote:    opening.Remote,
+		Link:      opening.Link,
+		Salary:    opening.Salary,
+	}
 
+	sendSuccess(ctx, "create-opening", response)
 }
