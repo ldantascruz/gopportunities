@@ -33,12 +33,12 @@ type CreateOpeningResponse struct {
 	Data    schemas.OpeningResponse `json:"data"`
 }
 
-type UpdateOpeningResponse struct {
+type DeleteOpeningResponse struct {
 	Message string                  `json:"message"`
 	Data    schemas.OpeningResponse `json:"data"`
 }
 
-type DeleteOpeningResponse struct {
+type UpdateOpeningResponse struct {
 	Message string                  `json:"message"`
 	Data    schemas.OpeningResponse `json:"data"`
 }
